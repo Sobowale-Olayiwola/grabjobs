@@ -25,6 +25,7 @@ func inject(d *DataSources) *gin.Engine {
 	 */
 	jobService := _jobsService.NewJobService(mongoJobRepo, _mongoJobsQueries.MongoQuery{})
 
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	router.Use(cors.Default())
 	router.GET("/", func(ctx *gin.Context) {
