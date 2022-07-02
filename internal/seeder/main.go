@@ -1,4 +1,4 @@
-package main
+package seeder
 
 func main() {
 	SeedData()
