@@ -2,7 +2,6 @@ package main
 
 import (
 	"grabjobs/internal/constants"
-	"grabjobs/internal/middleware"
 	_mongoJobsRepo "grabjobs/jobs/repository/mongo"
 	_mongoJobsQueries "grabjobs/jobs/repository/queries"
 	"net/http"
@@ -27,7 +26,6 @@ func inject(d *DataSources) *gin.Engine {
 	jobService := _jobsService.NewJobService(mongoJobRepo, _mongoJobsQueries.MongoQuery{})
 
 	router := gin.Default()
-	router.Use(middleware.LoggerToFile())
 	router.Use(cors.Default())
 	router.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{"message": "Welcome to grabjobs"})
