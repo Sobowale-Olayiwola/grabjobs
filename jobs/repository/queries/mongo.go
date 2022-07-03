@@ -14,6 +14,7 @@ func (m MongoQuery) GetJobsByFilter(filter map[string]interface{}) interface{} {
 	lng := filter["lng"].(float64)
 	lat := filter["lat"].(float64)
 	radius := filter["radius"].(int64)
+	//$minDistance property is set to zero to also include the job at that coordinate and near by radius
 	locationQuery := bson.D{{"location", bson.D{{"$near", bson.D{{"$geometry", bson.D{{"type", "Point"}, {"coordinates", bson.A{lng, lat}}}}, {"$minDistance", 0}, {"$maxDistance", radius}}}}}}
 	if title != "" {
 		query = bson.D{{"$and", bson.A{locationQuery, bson.D{
